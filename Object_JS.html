@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Js</title>
+</head>
+
+<body>
+<p id="demo"></p>
+</body>
+<script>
+    // Create an object:
+    const Sinhvien = {
+        Masv: "1283724",
+        Hoten : "Nguyễn Đức Nhân",
+        NamSinh : 1999,
+        QueQuan: "Hung Yên",
+        Tuoi : function() {
+            var  d = new Date();
+            return d.getFullYear() - this.NamSinh ;
+        },
+        set ten(ten) {
+            this.Hoten = ten;
+        },
+        get ten(){
+            return this.Hoten;
+        }
+
+    };
+    Sinhvien.ten = "Lê Hoa";
+    console.log(Sinhvien.ten);
+</script>
+</html>
