@@ -1,0 +1,31 @@
+﻿[{
+    "id" : "p1",
+    "name_provincial" : "Hưng Yên",
+    "district" : 
+    [{	"id":"d1",
+	"name_district":"Văn Giang"},
+     {	"id":"d2",
+	"name_district":"Yên Mỹ"}
+    ]
+},
+{
+    "id" : "p2",
+    "name_provincial" : "Lào Cai",
+    "district" : 
+    [{	"id":"d1",
+	"name_district":"Bảo Thắng"},
+     {	"id":"d2",
+	"name_district":"Văn Bàn"}
+    ]
+},
+{
+    "id" : "p3",
+    "name_provincial" : "Bắc Giang",
+    "district" : 
+    [{	"id":"d1",
+	"name_district":"Hiệp Hòa"},
+     {	"id":"d2",
+	"name_district":"Lạng Giang"}
+    ]
+}
+]
