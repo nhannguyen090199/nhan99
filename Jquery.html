@@ -48,6 +48,11 @@
             border: 10px solid #b1154a;
 
         }
+        .star{
+            width: 50px;
+            height: 50px;
+            border: 3px solid;
+        }
     </style>
 </head>
 <body>
@@ -73,7 +78,18 @@
     <hr>
     Chiều cao: <input class="do" id="h" type="number" value="100">
     Chiều rộng: <input class="do" id="w" type="number" value="100">
-    <div class="khoi4" >
+    <div class="khoi4"></div><hr>
+
+    <h2>EACH</h2>
+    <h3>Đánh giá sao </h3>
+    <div class="row">
+        <div class="star" number = "1">1</div>
+        <div class="star" number = "2">2</div>
+        <div class="star" number = "3">3</div>
+        <div class="star" number = "4">4</div>
+        <div class="star" number = "5">5</div>
+    </div>
+
 
 </body>
 <script>
@@ -117,6 +133,18 @@
             $(".khoi4").width($("#w").val());
             $(".khoi4").height($("#h").val());
         });
+        $(".star").click(function (){
+            $(".star").css('background-color',"white");
+            var number = parseInt($(this).attr("number")) ;
+            $(".star").each(function (index,element){
+                if($(this).attr("number")<=number) {
+                    $(this).css('background-color', "red");
+                }
+
+            })
+
+        });
+
     });
 </script>
 </html>
