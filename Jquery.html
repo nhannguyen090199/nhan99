@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+        body{
+            margin-bottom: 100px;
+        }
+        .container{
+            margin-top: 50px;
+        }
+        .khoi{
+            background-color: red;
+            width: 100%;
+            height: 100px;
+            margin-top: 5px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .khoi2{
+            background-color: blue;
+            width: 100%;
+            height: 100px;
+            margin-top: 5px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .khoi3{
+            background-color: yellow;
+            width: 100%;
+            height: 100px;
+            margin-top: 5px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .khoi4{
+            background-color: black;
+            width: 100px;
+            height: 100px;
+            margin-top: 5px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .bor{
+            border: 10px solid #b1154a;
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <input id="hide" class="btn btn-danger" type="button" value="Ẩn">
+    <input id="show" class="btn btn-primary" type="button" value="Hiện">
+    <div class="khoi"><h2 style="color:white">Hide/Show</h2></div><hr>
+    <select id="color">
+        <option>---Chọn màu----</option>
+        <option value="red">Đỏ</option>
+        <option value="yellow">Vàng</option>
+        <option value="black">Đen</option>
+    </select>
+    <div class="khoi2"><h2 style="color:white">CSS</h2></div>
+    <hr>
+    <h2>Attr/prop</h2>
+    <input id="pass" type="password" placeholder="Password">Hiện <input id="check" type="checkbox">
+    <hr>
+    <input id="add" type="button" class="btn btn-primary" value="Add Class">
+    <input id="remove" type="button" class="btn btn-danger" value="Remove Class">
+
+    <div class="khoi3"><h2 style="color:black">AddClass/RemoveClass</h2></div>
+    <hr>
+    Chiều cao: <input class="do" id="h" type="number" value="100">
+    Chiều rộng: <input class="do" id="w" type="number" value="100">
+    <div class="khoi4" >
+
+</body>
+<script>
+    $(document).ready(function (){
+        $("#hide").click(function (){
+            $(".khoi").hide();
+        });
+        $("#show").click(function (){
+            $(".khoi").show();
+        });
+
+        $("#color").change(function (){
+
+            if($(this).val()=='red'){
+                $(".khoi2").css("background-color","red");
+            }
+            else if($(this).val()=='yellow'){
+                $(".khoi2").css("background-color","yellow");
+            }
+            else if($(this).val()=='black'){
+                $(".khoi2").css("background-color","black");
+            }
+
+        });
+
+        $("#check").change(function (){
+            var check= $(this).prop("checked") ;
+            if(check==true) {
+                $("#pass").attr("type", "text");
+            }else{
+                $("#pass").attr("type", "password");
+            }
+        });
+        $("#add").click(function (){
+            $(".khoi3").addClass("bor");
+        });
+        $("#remove").click(function (){
+            $(".khoi3").removeClass("bor");
+        });
+        $(".do").change(function (){
+            $(".khoi4").width($("#w").val());
+            $(".khoi4").height($("#h").val());
+        });
+    });
+</script>
+</html>
