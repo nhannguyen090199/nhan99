@@ -136,8 +136,8 @@
         $(".star").click(function (){
             $(".star").css('background-color',"white");
             var number = parseInt($(this).attr("number")) ;
-            $(".star").each(function (index,element){
-                if($(this).attr("number")<=number) {
+            $(".star").each(function (index){
+                if(index+1<=number) {
                     $(this).css('background-color', "red");
                 }
 
