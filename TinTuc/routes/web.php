@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('admin')->group(function(){
-    Route::get('tintuc', 'TinTucController@tintuc');
+    Route::get('tintuc', 'NewsController@index');
+    Route::get('sua-tintuc/{id}', 'NewsController@editNews');
+    Route::post('sua-tintuc/{id}', 'NewsController@postEditNews');
+    Route::get('them-tintuc','NewsController@addNews' );
+    Route::post('them-tintuc','NewsController@postAddNews' );
+    Route::get('xoa-tintuc/{id}','NewsController@deleteNews' );
 });
