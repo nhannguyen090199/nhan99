@@ -25,33 +25,46 @@
 
     <div  style="width: 100%;">
         <h2>DANH SÁCH TIN TỨC</h2>
-        <a href="{{asset('admin/them-tintuc')}}" class="btn btn-primary">Thêm tin tức</a>
+
+            <a href="{{asset('admin/them-tintuc')}}" class="btn btn-primary">Thêm tin tức</a>
+            Lọc: <select id="filter_cate">
+                <option value="">-----Tất cả-----</option>
+                @foreach($cate as $cate)
+                    <option value="{{$cate->cate_id}}">{{$cate->cate_name}}</option>
+                @endforeach
+            </select>
+
+
         <table class="table table-bordered">
-            <tr style="background-color: #a0aec0; text-align: center">
-                <td width="5%">ID</td>
-                <td width="10%">Tiêu đề</td>
-                <td width="20%">Tóm tắt</td>
-                <td width="10%">Hình ảnh</td>
-                <td width="50%">Nội dung</td>
-                <td width="5%">Loại tin</td>
-                <td width="5%">Lươt xem</td>
-                <td width="5%">Lươt xem</td>
-            </tr>
-            @foreach($news as $news)
-            <tr>
-                <td>{{$news->news_id}}</td>
-                <td><a href="{{asset('admin/sua-tintuc/'.$news->news_id)}}">{{$news->title}}</a></td>
-                <td>{{$news->summary}}</td>
-                <td> <img src="{{asset('img/'.$news->img)}}" alt="" width="100%">    </td>
-                <td>{{$news->content}}</td>
-                <td>{{$news->news_cate}}</td>
-                <td>{{$news->view}}</td>
-                <td><button type="button" class="btn btn-danger delete" value="{{$news->news_id}}"  >
-                        Xóa
-                    </button></td>
-{{--                <td><b><a href="{{asset('admin/xoa-tintuc/'.$news->news_id)}}" style="color: red">Xóa</a></b></td>--}}
-            </tr>
-            @endforeach
+            <thead>
+                <tr style="background-color: #a0aec0; text-align: center">
+                    <td width="5%">ID</td>
+                    <td width="10%">Tiêu đề</td>
+                    <td width="20%">Tóm tắt</td>
+                    <td width="10%">Hình ảnh</td>
+                    <td width="50%">Nội dung</td>
+                    <td width="5%">Chuyên mục</td>
+                    <td width="5%">Lươt xem</td>
+                    <td width="5%">Lươt xem</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($news as $news)
+                <tr>
+                    <td>{{$news->news_id}}</td>
+                    <td><a href="{{asset('admin/sua-tintuc/'.$news->news_id)}}">{{$news->title}}</a></td>
+                    <td>{{$news->summary}}</td>
+                    <td> <img src="{{asset('img/'.$news->img)}}" alt="" width="100%">    </td>
+                    <td>{{$news->content}}</td>
+                    <td>{{$news->cate_name}}</td>
+                    <td>{{$news->view}}</td>
+                    <td><button type="button" class="btn btn-danger delete" value="{{$news->news_id}}"  >
+                            Xóa
+                        </button></td>
+    {{--                <td><b><a href="{{asset('admin/xoa-tintuc/'.$news->news_id)}}" style="color: red">Xóa</a></b></td>--}}
+                </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
     <script>
@@ -76,6 +89,37 @@
 
                 });
             });
+
+            $('#filter_cate').change(function (){
+                var cate = $(this).val();
+                if(cate!="") {
+                    $.ajax({
+                        url: '{{asset('admin/filter_cate')}}',
+                        data: {cate: cate}
+                    }).done(function (data) {
+                        var obj = JSON.parse(data);
+                        var html = '';
+                        for (x in obj) {
+                            html += '<tr>';
+                            html += '<td>' + obj[x]['news_id'] + '</td>';
+                            html += '<td>' + obj[x]['title'] + '</td>';
+                            html += '<td>' + obj[x]['summary'] + '</td>';
+                            html += '<td>' + obj[x]['img'] + '</td>';
+                            html += '<td>' + obj[x]['content'] + '</td>';
+                            html += '<td>' + obj[x]['cate_name'] + '</td>';
+                            html += '<td>' + obj[x]['view'] + '</td>'
+                            html += '<td>' +
+                                '<button type="button" class="btn btn-danger delete" value="'+obj[x]['news_id'] +'" >Xóa</button>' + '</td>'
+                            html += '</tr>';
+
+                        }
+                        $('tbody').html(html);
+
+                    });
+                }else{
+                    location.reload();
+                }
+            })
         });
     </script>
 @stop

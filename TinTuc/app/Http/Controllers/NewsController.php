@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Categorie;
@@ -17,10 +18,20 @@ class NewsController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(){
-        $news = News::all();
-        return view('news.index',['news'=>$news]);
+        $news = DB::table('news')->select('news.*','categories.cate_name')
+            ->join('categories','news.news_cate','=','categories.cate_id')->get();
+        $cate = Categorie::all();
+        return view('news.index',['news'=>$news,'cate'=>$cate]);
     }
 
+    /**
+     * @param Request $request
+     */
+    public function filterCate(Request $request){
+        $data = DB::table('news')->where('news_cate',$request->cate)->select('news.*','categories.cate_name')
+            ->join('categories','news.news_cate','=','categories.cate_id')->get();
+        echo $data;
+    }
     /**
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View

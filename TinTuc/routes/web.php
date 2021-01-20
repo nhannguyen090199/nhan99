@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->group(function(){
     //Tin Tức
     Route::get('/','NewsController@index');
+    Route::get('filter_cate','NewsController@filterCate');
     Route::get('tintuc', 'NewsController@index');
     Route::get('sua-tintuc/{id}', 'NewsController@editNews');
     Route::post('sua-tintuc/{id}', 'NewsController@postEditNews');
