@@ -27,7 +27,7 @@ class NewsFactory extends Factory
             'summary' => $this->faker->text(150),
             'content'=> $this->faker->text(500),
             'img'=> Str::random(10).'.jpg',
-            'news_cate'=>$this->faker->numberBetween(1,10),
+            'news_cate'=>$this->faker->numberBetween(1,5),
             'view'=>0,
         ];
     }

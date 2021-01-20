@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@extends('news.master')
+@section('main')
     <style>
         .form-control{
             width: 600px;
@@ -18,15 +14,11 @@
         alert('{{session('mess')}}');
         @endif
     </script>
-</head>
-<body>
+
+
 <div class="container"  style="margin-top: 40px;">
     <h3>Thêm tin tức</h3>
-    @if(count($errors)>0)
-        @foreach($errors->all as $erro)
-            <li>{{$erro}}</li>
-        @endforeach
-    @endif
+
 
     <table id="table">
         <tr>
@@ -62,11 +54,9 @@
             <td><h5>Loại tin tức</h5></td>
             <td>
                 <select name="cate" id="">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    @foreach($cate as $cate)
+                        <option value="{{$cate->cate_id}}">{{$cate->cate_name}}</option>
+                    @endforeach
 
                 </select>
             </td>
@@ -76,7 +66,7 @@
     <input type="submit" value="Thêm" class="btn btn-primary ">
     </form>
 </div>
-</body>
+
 
 <script>
     function changeImg(file){
@@ -100,5 +90,5 @@
     }
 
 </script>
-</html>
+@stop
 
