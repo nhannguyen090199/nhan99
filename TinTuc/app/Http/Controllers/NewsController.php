@@ -30,7 +30,7 @@ class NewsController extends Controller
     public function filterCate(Request $request){
         $data = DB::table('news')->where('news_cate',$request->cate)->select('news.*','categories.cate_name')
             ->join('categories','news.news_cate','=','categories.cate_id')->get();
-        echo $data;
+       return response()->json(['data'=>$data]);
     }
     /**
      * @param int $id
@@ -101,7 +101,9 @@ class NewsController extends Controller
      */
     public function deleteModal(Request $request){
         $news = News::where('news_id',$request->id)->first();
-        echo  $news;
+        return \response()->json([
+            'data'=>$news
+        ]);
     }
 
     /**

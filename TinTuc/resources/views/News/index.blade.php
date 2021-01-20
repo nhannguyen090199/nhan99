@@ -2,7 +2,11 @@
 @section('main')
     <!-- Button trigger modal -->
 
-
+<style>
+    img{
+        width: 100%;
+    }
+</style>
     <!-- Modal -->
     <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -71,22 +75,19 @@
         @if(session('mess'))
         alert('{{session('mess')}}') ;
         @endif
-
         $(document).ready(function (){
-            $('.delete').click(function (){
+            $('body').on('click','.delete',function (){
                 $('#modal_delete').modal('show');
                 var id = $(this).val();
                 $.ajax({
                     url: '{{asset('/admin/delete_modal')}}',
                     data: {id: id }
                 }).done(function (news){
-                    var object = JSON.parse(news);
 
+                    var object = news.data;
                     $('#news_id').html(object['news_id']);
                     $('#news_title').html(object['title']);
                     $('#delete').attr('href','{{asset('admin/xoa-tintuc/')}}' +'/'+ object['news_id'] );
-
-
                 });
             });
 
@@ -95,26 +96,24 @@
                 if(cate!="") {
                     $.ajax({
                         url: '{{asset('admin/filter_cate')}}',
-                        data: {cate: cate}
-                    }).done(function (data) {
-                        var obj = JSON.parse(data);
+                        data: {cate: cate},
+                    }).done(function (obj) {
+                        obj = obj.data;
                         var html = '';
-                        for (x in obj) {
+                        for (var x in obj) {
                             html += '<tr>';
                             html += '<td>' + obj[x]['news_id'] + '</td>';
                             html += '<td>' + obj[x]['title'] + '</td>';
                             html += '<td>' + obj[x]['summary'] + '</td>';
-                            html += '<td>' + obj[x]['img'] + '</td>';
+                            html += '<td>' + '<img src="'+'{{asset("img")}}/' + obj[x]['img'] +'">' + '</td>';
                             html += '<td>' + obj[x]['content'] + '</td>';
                             html += '<td>' + obj[x]['cate_name'] + '</td>';
                             html += '<td>' + obj[x]['view'] + '</td>'
                             html += '<td>' +
-                                '<button type="button" class="btn btn-danger delete" value="'+obj[x]['news_id'] +'" >Xóa</button>' + '</td>'
+                                '<button type="button" class="btn btn-danger delete" value="'+ obj[x]['news_id'] +'" >Xóa</button>' + '</td>'
                             html += '</tr>';
-
                         }
                         $('tbody').html(html);
-
                     });
                 }else{
                     location.reload();
